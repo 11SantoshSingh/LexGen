@@ -23,7 +23,8 @@ This project takes source code as input and generates an **Annotated Parse Tree*
 ---
 
 ## 📸 Screenshots  
- 
+![ss](assests/ss3.png) 
+![Iss](assests/ss4.png) 
 ![Input Example](assests/ss1.png)  
 ![Parse Tree](assests/ss2.png)  
 
