@@ -1,0 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #1e1e1e;
+  color: #ffffff;
+  margin: 20px;
+}
+
+#editor-container {
+  height: 300px;
+  border: 2px solid #4CAF50;
+}
+
+button {
+  margin: 20px 0;
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.token-stream {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #2e2e2e;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.token-box {
+  background: #4CAF50;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.svg-wrapper {
+  overflow-x: auto;
+  padding-bottom: 10px;
+  border: 1px solid #4CAF50;
+  background: #1e1e1e;
+}
+
+svg {
+  background: #1e1e1e;
+  margin: 20px 0;
+}
+
+.node, .annotated-node {
+  fill: #1e1e1e;
+  stroke: #4CAF50;
+  stroke-width: 2;
+}
+
+.annotated-node {
+  fill: #2e2e2e;
+}
+
+.text {
+  fill: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}

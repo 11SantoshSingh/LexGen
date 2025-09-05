@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Advanced JavaScript Compiler Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Advanced JavaScript Compilation Visualizer</h1>
+  <div id="editor-container"></div>
+  <button onclick="compile()">Compile</button>
+
+  <h2>Token Stream</h2>
+  <div id="tokenStream" class="token-stream"></div>
+
+  <h2>Parse Tree</h2>
+  <div class="svg-wrapper">
+    <svg id="parseTree" height="500"></svg>
+  </div>
+
+  <h2>Annotated Parse Tree</h2>
+  <div class="svg-wrapper">
+    <svg id="annotatedTree" height="500"></svg>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.34.1/min/vs/loader.min.js"></script>
+  <script>
+    let editor;
+    require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.34.1/min/vs' }});
+    require(['vs/editor/editor.main'], function () {
+      editor = monaco.editor.create(document.getElementById('editor-container'), {
+        value: 'let a = 5;\nlet b = a + 2;\nlet c = b * (3 + 1);\nlet d = c + b * a + 10 / 2;\nlet e = d * (a + b + c + d + 3);',
+        language: 'javascript',
+        theme: 'vs-dark'
+      });
+    });
+  </script>
+
+  <script src="lexer.js"></script>
+  <script src="parser.js"></script>
+  <script src="semantic.js"></script>
+  <script src="visualizer.js"></script>
+  <script>
+    function compile() {
+      const code = editor.getValue();
+      try {
+        const tokens = lexer(code);
+        const tokenStream = document.getElementById("tokenStream");
+        tokenStream.innerHTML = '';
+        tokens.forEach(t => {
+          const div = document.createElement('div');
+          div.className = 'token-box';
+          div.textContent = `${t.type}: '${t.value}'`;
+          tokenStream.appendChild(div);
+        });
+
+        const tree = parser(tokens);
+        drawTree('parseTree', tree, false);
+
+        const annotated = semanticAnalyzer(tree);
+        drawTree('annotatedTree', annotated, true);
+      } catch (err) {
+        alert('Compilation Error: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
